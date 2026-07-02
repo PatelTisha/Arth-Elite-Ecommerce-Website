@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart — Arth Elite</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+</head>
+<body data-page="cart">
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="Arth Elite Logo" />
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="login.html" class="nav-login-link">Login</a>
+      </div>
+      <div class="nav-actions">
+        <span class="nav-user-greet" style="display:none;"></span>
+        <a href="cart.html" class="cart-link active">
+          🛒 Cart
+          <span class="cart-count" style="display:none;">0</span>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Page Hero ── -->
+  <div class="page-hero">
+    <div class="container">
+      <h1>🛒 Your Cart</h1>
+      <p>Review your crystals before checkout.</p>
+    </div>
+  </div>
+
+  <!-- ── Cart Section ── -->
+  <section class="cart-section">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="shop.html">Shop</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Cart</span>
+      </div>
+
+      <div class="cart-layout">
+
+        <!-- Cart Items -->
+        <div>
+          <div class="cart-items-list" id="cart-items">
+            <!-- Rendered by JS -->
+          </div>
+          <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="shop.html" class="btn-outline">← Continue Shopping</a>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div id="cart-summary" style="display:none;">
+          <div class="cart-summary-card">
+            <h3>Order Summary</h3>
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="cart-subtotal">₹0</span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span id="cart-shipping" class="free-shipping">FREE</span>
+            </div>
+            <div class="summary-row" style="font-size:0.78rem; color:var(--text-light);">
+              <span colspan="2">Free shipping on orders above ₹999</span>
+            </div>
+            <hr class="summary-divider" />
+            <div class="summary-row summary-total">
+              <span>Total</span>
+              <span id="cart-total">₹0</span>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">
+              Proceed to Checkout →
+            </button>
+            <div class="summary-badges">
+              <span style="font-size:0.75rem; color:var(--text-light);">🔒 Secure · 💎 Authentic · ✈️ Fast</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── You May Also Like ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">You May Also Love</h2>
+      <p class="section-subtitle">More crystals for your collection.</p>
+      <div class="products-grid" id="rec-grid"></div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/logo.jpg" alt="Aura Elite" />
+          <p>Premium handcrafted crystal bracelets.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="shop.html">All Crystals</a></li>
+            <li><a href="cart.html">My Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Help</h5>
+          <ul>
+            <!-- <li><a href="#">Shipping</a></li>
+            <li><a href="#">Returns</a></li> -->
+            <li><a href="crystal-guide.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <!-- <h5>Legal</h5> -->
+          <ul>
+            <!-- <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li> -->
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ArthElite.</span>
+        <div class="footer-payment">
+          <span class="payment-badge">UPI</span>
+          <!-- <span class="payment-badge">Razorpay</span>
+          <span class="payment-badge">Cards</span> -->
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+
+    function goToCheckout() {
+      if (!Auth.isLoggedIn()) {
+        window.location.href = 'login.html?return=' + encodeURIComponent('checkout.html');
+      } else {
+        window.location.href = 'checkout.html';
+      }
+    }
+
+    // Render recommended products
+    document.addEventListener('DOMContentLoaded', () => {
+      const recGrid = document.getElementById('rec-grid');
+      if (recGrid) {
+        const recs = products.sort(() => Math.random() - 0.5).slice(0, 4);
+        recGrid.innerHTML = recs.map(createProductCard).join('');
+        initScrollAnimations();
+      }
+    });
+  </script>
+</body>
+</html>

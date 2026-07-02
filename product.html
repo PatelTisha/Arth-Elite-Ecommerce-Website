@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product — Arth Elite</title>
+  <meta name="description" content="Premium crystal bracelet detail page — Aura Elite." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+</head>
+<body data-page="product">
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="Arth Elite Logo" />
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="login.html" class="nav-login-link">Login</a>
+      </div>
+      <div class="nav-actions">
+        <span class="nav-user-greet" style="display:none;"></span>
+        <a href="cart.html" class="cart-link">
+          🛒 Cart
+          <span class="cart-count" style="display:none;">0</span>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Product Detail ── -->
+  <section class="product-detail-section">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="shop.html">Shop</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="pd-name">Product</span>
+      </div>
+
+      <div class="product-detail-grid">
+
+        <!-- ── Gallery ── -->
+        <div class="product-gallery">
+          <div class="main-image-wrap">
+            <img id="main-product-img" src="" alt="Product" />
+          </div>
+          <div class="thumb-grid" id="thumb-grid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- ── Details ── -->
+        <div class="product-details">
+          <span class="pd-category-tag">
+            <span>✦</span>
+            <span class="pd-category">Category</span>
+          </span>
+
+          <h1 class="pd-title pd-name">Loading...</h1>
+
+          <div class="pd-rating-row" id="pd-rating">
+            <!-- Stars rendered by JS -->
+          </div>
+
+          <div class="pd-price-section">
+            <div class="pd-price-main pd-price">₹0</div>
+            <div class="pd-price-note">Inclusive of all taxes · Free shipping above ₹999</div>
+          </div>
+
+          <p class="pd-description">Loading description...</p>
+
+          <div class="pd-benefits-list">
+            <h4>Crystal Benefits</h4>
+            <ul id="pd-benefits"></ul>
+          </div>
+
+          <div class="pd-meta">
+            <div class="pd-meta-row">
+              <span class="pd-meta-label">Chakra</span>
+              <span class="pd-meta-val pd-chakra">—</span>
+            </div>
+            <div class="pd-meta-row">
+              <span class="pd-meta-label">Material</span>
+              <span class="pd-meta-val pd-material">—</span>
+            </div>
+            <div class="pd-meta-row">
+              <span class="pd-meta-label">Size</span>
+              <span class="pd-meta-val pd-size">—</span>
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <div class="pd-qty-section">
+            <span class="pd-qty-label">Quantity</span>
+            <div class="qty-control">
+              <button id="qty-minus" type="button" aria-label="Decrease">−</button>
+              <input type="number" id="pd-qty" class="qty-input" value="1" min="1" max="10" />
+              <button id="qty-plus" type="button" aria-label="Increase">+</button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="pd-actions">
+            <button class="pd-add-btn" id="pd-add-cart">🛒 Add to Cart</button>
+            <button class="pd-wishlist-btn" id="pd-wishlist">♡ Wishlist</button>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="pd-trust-badges">
+            <span class="trust-badge"><span class="trust-icon">🔒</span> Secure Payment</span>
+            <span class="trust-badge"><span class="trust-icon">✈️</span> Free Shipping</span>
+            <span class="trust-badge"><span class="trust-icon">💎</span> Authentic Crystal</span>
+            <span class="trust-badge"><span class="trust-icon">🔄</span> Easy Returns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Similar Products ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">You May Also Love</h2>
+      <p class="section-subtitle">More crystals from the same intention category.</p>
+      <div class="products-grid" id="similar-grid"></div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/logo.jpg" alt="Aura Elite" />
+          <p>Premium handcrafted crystal bracelets for healing, wealth, love & protection.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="shop.html?cat=healing">Healing Crystals</a></li>
+            <li><a href="shop.html?cat=wealth">Wealth Crystals</a></li>
+            <li><a href="shop.html?cat=love">Love Crystals</a></li>
+            <li><a href="shop.html?cat=protection">Protection Crystals</a></li>
+            <li><a href="shop.html?cat=calm">Calm Crystals</a></li>
+            <li><a href="shop.html?cat=combo">Combo</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Account</h5>
+          <ul>
+            <li><a href="login.html">Sign In</a></li>
+            <li><a href="login.html">Create Account</a></li>
+            <li><a href="cart.html">My Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Help</h5>
+          <ul>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Crystal Guide</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Aura Elite. All rights reserved.</span>
+        <div class="footer-payment">
+          <span class="payment-badge">UPI</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+
+    // Thumbnail gallery setup after product loads
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'));
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      // Build thumbs from similar products + current
+      const similar = products.filter(p => p.category === product.category).slice(0, 4);
+      const thumbGrid = document.getElementById('thumb-grid');
+      if (thumbGrid) {
+        thumbGrid.innerHTML = similar.map((p, i) => `
+          <div class="thumb ${p.id === product.id ? 'active' : ''}" onclick="switchImage('${p.image}', this)">
+            <img src="${p.image}" alt="${p.name}" onerror="this.src='images/placeholder.jpg'" />
+          </div>
+        `).join('');
+      }
+    });
+
+    function switchImage(src, thumbEl) {
+      document.getElementById('main-product-img').src = src;
+      document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      thumbEl.classList.add('active');
+    }
+  </script>
+</body>
+</html>

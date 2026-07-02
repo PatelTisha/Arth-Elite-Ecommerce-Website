@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Arth Elite</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <style>
+    body { padding-top: 0 !important; }
+    .auth-page { padding-top: 40px; padding-bottom: 40px; }
+  </style>
+</head>
+<body>
+
+  <div class="auth-page">
+    <div class="auth-container">
+
+      <!-- Logo -->
+      <div class="auth-logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Arth Elite Logo" />
+        </a>
+        <p class="tagline">Feel the Aura ✨</p>
+      </div>
+
+      <!-- Auth Card -->
+      <div class="auth-card">
+
+        <!-- Tabs -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-signin" onclick="switchTab('signin')">Sign In</button>
+          <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Create Account</button>
+        </div>
+
+        <!-- ── Sign In Form ── -->
+        <div class="auth-form-panel active" id="panel-signin">
+          <h2 class="auth-form-title">Welcome Back ✨</h2>
+          <p class="auth-form-subtitle">Sign in to your Arth Elite account.</p>
+
+          <div id="signin-alert" class="form-alert"></div>
+
+          <div class="auth-form" id="signin-form">
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon">✉️</span>
+                <input type="email" id="si-email" class="auth-input" placeholder="Your email address" autocomplete="email" />
+              </div>
+              <div class="input-error-msg" id="si-email-err">Please enter a valid email address.</div>
+            </div>
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="si-password" class="auth-input" placeholder="Your password" autocomplete="current-password" />
+              </div>
+              <div class="input-error-msg" id="si-pw-err">Please enter your password.</div>
+            </div>
+
+            <div style="text-align:right; margin-top:-8px;">
+              <a href="#" style="font-size:0.8rem; color:#7B5EA7; font-weight:600;">Forgot password?</a>
+            </div>
+
+            <button type="button" class="auth-submit" id="signin-btn" onclick="handleSignIn()">
+              Sign In to Your Aura
+            </button>
+
+            <div class="auth-divider">or</div>
+
+            <button type="button" class="btn-outline" style="width:100%; justify-content:center;" onclick="switchTab('register')">
+              Create a New Account
+            </button>
+          </div>
+        </div>
+
+        <!-- ── Register Form ── -->
+        <div class="auth-form-panel" id="panel-register">
+          <h2 class="auth-form-title">Join Arth Elite 🌿</h2>
+          <p class="auth-form-subtitle">Create your account and begin your crystal journey.</p>
+
+          <div id="register-alert" class="form-alert"></div>
+
+          <div class="auth-form" id="register-form">
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon">👤</span>
+                <input type="text" id="reg-name" class="auth-input" placeholder="Your full name" autocomplete="name" />
+              </div>
+              <div class="input-error-msg" id="reg-name-err">Please enter your full name.</div>
+            </div>
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon">✉️</span>
+                <input type="email" id="reg-email" class="auth-input" placeholder="Your email address" autocomplete="email" />
+              </div>
+              <div class="input-error-msg" id="reg-email-err">Please enter a valid email address.</div>
+            </div>
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="reg-password" class="auth-input" placeholder="Create a password (min. 6 chars)" autocomplete="new-password" />
+              </div>
+              <div class="input-error-msg" id="reg-pw-err">Password must be at least 6 characters.</div>
+            </div>
+            <div>
+              <div class="input-wrap">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="reg-confirm" class="auth-input" placeholder="Confirm your password" autocomplete="new-password" />
+              </div>
+              <div class="input-error-msg" id="reg-confirm-err">Passwords do not match.</div>
+            </div>
+
+            <p style="font-size:0.78rem; color:var(--text-light); text-align:center;">
+              <!-- By creating an account, you agree to our
+              <a href="#" style="color:#7B5EA7; font-weight:600;">Terms of Service</a> &
+              <a href="#" style="color:#7B5EA7; font-weight:600;">Privacy Policy</a>. -->
+            </p>
+
+            <button type="button" class="auth-submit" id="register-btn" onclick="handleRegister()">
+              Create My Account ✨
+            </button>
+
+            <div class="auth-divider">or</div>
+
+            <button type="button" class="btn-outline" style="width:100%; justify-content:center;" onclick="switchTab('signin')">
+              Already have an account? Sign In
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Back to shop -->
+      <div style="text-align:center; margin-top:24px;">
+        <a href="shop.html" style="font-size:0.85rem; color:var(--text-light); font-weight:500;">
+          ← Continue browsing without signing in
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+
+  <script>
+    // Redirect if already logged in
+    document.addEventListener('DOMContentLoaded', () => {
+      if (Auth.isLoggedIn()) {
+        const params = new URLSearchParams(window.location.search);
+        window.location.href = params.get('return') || 'index.html';
+      }
+
+      // Pre-select tab from URL hash
+      if (window.location.hash === '#register') switchTab('register');
+    });
+
+    function switchTab(tab) {
+      const isSignin = tab === 'signin';
+      document.getElementById('tab-signin').classList.toggle('active', isSignin);
+      document.getElementById('tab-register').classList.toggle('active', !isSignin);
+      document.getElementById('panel-signin').classList.toggle('active', isSignin);
+      document.getElementById('panel-register').classList.toggle('active', !isSignin);
+      clearAlerts();
+    }
+
+    function clearAlerts() {
+      document.querySelectorAll('.form-alert').forEach(el => { el.className = 'form-alert'; el.textContent = ''; });
+      document.querySelectorAll('.auth-input').forEach(el => el.classList.remove('error', 'success'));
+      document.querySelectorAll('.input-error-msg').forEach(el => el.classList.remove('visible'));
+    }
+
+    function showAlert(id, type, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.className = `form-alert show ${type}`;
+    }
+
+    function validateInput(inputId, errId, validator) {
+      const input = document.getElementById(inputId);
+      const errEl = document.getElementById(errId);
+      const valid = validator(input.value.trim());
+      input.classList.toggle('error', !valid);
+      errEl.classList.toggle('visible', !valid);
+      return valid;
+    }
+
+    function handleSignIn() {
+      clearAlerts();
+      const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      const notEmpty = v => v.length > 0;
+
+      const v1 = validateInput('si-email', 'si-email-err', isEmail);
+      const v2 = validateInput('si-password', 'si-pw-err', notEmpty);
+      if (!v1 || !v2) return;
+
+      const btn = document.getElementById('signin-btn');
+      btn.textContent = 'Signing in…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        const email = document.getElementById('si-email').value.trim();
+        const password = document.getElementById('si-password').value;
+        const result = Auth.login(email, password);
+
+        if (result.success) {
+          showAlert('signin-alert', 'success', `✓ ${result.message}`);
+          document.getElementById('si-email').classList.add('success');
+          document.getElementById('si-password').classList.add('success');
+
+          setTimeout(() => {
+            const params = new URLSearchParams(window.location.search);
+            window.location.href = params.get('return') || 'index.html';
+          }, 1000);
+        } else {
+          showAlert('signin-alert', 'error', `✕ ${result.message}`);
+          document.getElementById('si-email').classList.add('error');
+          document.getElementById('si-password').classList.add('error');
+          btn.textContent = 'Sign In to Your Aura';
+          btn.disabled = false;
+        }
+      }, 600);
+    }
+
+    function handleRegister() {
+      clearAlerts();
+      const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      const notEmpty = v => v.length >= 2;
+      const pwValid = v => v.length >= 6;
+      const pwMatch = v => v === document.getElementById('reg-password').value;
+
+      const v1 = validateInput('reg-name', 'reg-name-err', notEmpty);
+      const v2 = validateInput('reg-email', 'reg-email-err', isEmail);
+      const v3 = validateInput('reg-password', 'reg-pw-err', pwValid);
+      const v4 = validateInput('reg-confirm', 'reg-confirm-err', pwMatch);
+      if (!v1 || !v2 || !v3 || !v4) return;
+
+      const btn = document.getElementById('register-btn');
+      btn.textContent = 'Creating account…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        const name = document.getElementById('reg-name').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const result = Auth.register(name, email, password);
+
+        if (result.success) {
+          showAlert('register-alert', 'success', `✓ ${result.message}`);
+          setTimeout(() => switchTab('signin'), 1500);
+        } else {
+          showAlert('register-alert', 'error', `✕ ${result.message}`);
+          document.getElementById('reg-email').classList.add('error');
+        }
+        btn.textContent = 'Create My Account ✨';
+        btn.disabled = false;
+      }, 700);
+    }
+
+    // Enter key support
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      if (document.getElementById('panel-signin').classList.contains('active')) handleSignIn();
+      else handleRegister();
+    });
+  </script>
+</body>
+</html>

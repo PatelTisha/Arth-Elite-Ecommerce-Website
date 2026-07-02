@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Arth Elite</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body data-page="checkout">
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="Arth Elite Logo" />
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="login.html" class="nav-login-link">Login</a>
+      </div>
+      <div class="nav-actions">
+        <span class="nav-user-greet" style="display:none;"></span>
+        <a href="cart.html" class="cart-link">
+          🛒 Cart
+          <span class="cart-count" style="display:none;">0</span>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Page Hero ── -->
+  <div class="page-hero">
+    <div class="container">
+      <h1>Secure Checkout</h1>
+      <p>You're just one step away from your crystals.</p>
+    </div>
+  </div>
+
+  <!-- ── Checkout Section ── -->
+  <section class="checkout-section">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="cart.html">Cart</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Checkout</span>
+      </div>
+
+      <div class="checkout-layout">
+
+        <!-- ── Shipping Form ── -->
+        <div class="checkout-form-card">
+          <h2>Shipping Details</h2>
+          <p class="subtitle">Where should we send your crystals?</p>
+
+          <form id="checkout-form" novalidate>
+            <p class="form-section-title">Contact Information</p>
+            <div class="form-grid-2">
+              <div class="form-group" id="fg-firstname">
+                <label class="form-label" for="firstname">First Name *</label>
+                <input type="text" id="firstname" class="form-input" placeholder="Priya" />
+                <span class="form-error">Please enter your first name.</span>
+              </div>
+              <div class="form-group" id="fg-lastname">
+                <label class="form-label" for="lastname">Last Name *</label>
+                <input type="text" id="lastname" class="form-input" placeholder="Sharma" />
+                <span class="form-error">Please enter your last name.</span>
+              </div>
+            </div>
+            <div class="form-group" id="fg-email" style="margin-top:12px;">
+              <label class="form-label" for="email">Email Address *</label>
+              <input type="email" id="email" class="form-input" placeholder="priya@example.com" />
+              <span class="form-error">Please enter a valid email address.</span>
+            </div>
+            <div class="form-group" id="fg-phone" style="margin-top:12px;">
+              <label class="form-label" for="phone">Phone Number *</label>
+              <input type="tel" id="phone" class="form-input" placeholder="+91 98765 43210" />
+              <span class="form-error">Please enter a valid 10-digit phone number.</span>
+            </div>
+
+            <p class="form-section-title">Shipping Address</p>
+            <div class="form-group" id="fg-address">
+              <label class="form-label" for="address">Address Line 1 *</label>
+              <input type="text" id="address" class="form-input" placeholder="House No, Street Name" />
+              <span class="form-error">Please enter your address.</span>
+            </div>
+            <div class="form-group" style="margin-top:12px;" id="fg-address2">
+              <label class="form-label" for="address2">Address Line 2 (Optional)</label>
+              <input type="text" id="address2" class="form-input" placeholder="Apartment, Colony, Landmark" />
+            </div>
+            <div class="form-grid-2" style="margin-top:12px;">
+              <div class="form-group" id="fg-city">
+                <label class="form-label" for="city">City *</label>
+                <input type="text" id="city" class="form-input" placeholder="Mumbai" />
+                <span class="form-error">Please enter your city.</span>
+              </div>
+              <div class="form-group" id="fg-state">
+                <label class="form-label" for="state">State *</label>
+                <select id="state" class="form-input form-select">
+                  <option value="">Select State</option>
+                  <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option>
+                  <option>Delhi</option><option>Goa</option><option>Gujarat</option>
+                  <option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option>
+                  <option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
+                  <option>Maharashtra</option><option>Manipur</option><option>Meghalaya</option>
+                  <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+                  <option>Tamil Nadu</option><option>Telangana</option><option>Uttar Pradesh</option>
+                  <option>Uttarakhand</option><option>West Bengal</option>
+                </select>
+                <span class="form-error">Please select your state.</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:12px;" id="fg-pincode">
+              <label class="form-label" for="pincode">PIN Code *</label>
+              <input type="text" id="pincode" class="form-input" placeholder="400001" maxlength="6" />
+              <span class="form-error">Please enter a valid 6-digit PIN code.</span>
+            </div>
+
+            <!-- Payment Section -->
+
+
+            <!-- <div class="payment-section">
+              <h4><span class="payment-logo">💳</span> Payment — Powered by Razorpay</h4>
+              <p style="font-size:0.85rem; color:var(--text-mid); margin-bottom:0;">All major UPI apps, credit/debit cards, net banking, and wallets accepted.</p>
+              <button type="submit" class="razorpay-btn" id="pay-btn">
+                🔐 Pay Securely with Razorpay
+              </button>
+            </div> -->
+
+            <!-- PAYMENT -->
+          <div class="payment-section">
+            <h3>Pay via UPI</h3>
+
+            <img src="images/realscanner.jpg" style="width:200px">
+
+            <p><b>UPI ID:</b> 9099521396@kotak</p>
+
+            <!-- <input id="user-upi" placeholder="Your UPI ID">
+            <input id="txn-id" placeholder="Transaction ID"> -->
+          </div>
+
+        <!-- ✅ NEW FIELDS -->
+        <div class="form-group" style="margin-top:15px;">
+          <label class="form-label">Your UPI ID *</label>
+          <input type="text" id="user-upi" class="form-input" placeholder="yourname@upi">
+        </div>
+
+        <div class="form-group" style="margin-top:12px;">
+          <label class="form-label">Transaction ID *</label>
+          <input type="text" id="txn-id" class="form-input" placeholder="Enter payment reference ID">
+        </div>
+
+        <p style="font-size:0.8rem; color:#666; margin-top:8px;">
+          ⚠️ Order will be confirmed after payment verification
+        </p>
+
+        <div style="margin-top:15px;">
+  <button type="button" class="upi-btn" onclick="confirmPayment()" id="pay-btn">
+    ✅ I Have Paid
+  </button>
+</div>
+
+
+      </div>
+        <!-- ── Order Summary ── -->
+        <div class="order-summary-card">
+          <h3>Order Summary</h3>
+          <div class="order-items" id="order-items">
+            <!-- Rendered by JS -->
+          </div>
+          <hr class="summary-divider" />
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="co-subtotal">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span id="co-shipping" class="free-shipping">FREE</span>
+          </div>
+          <hr class="summary-divider" />
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span id="co-total">₹0</span>
+          </div>
+          <div style="margin-top:24px; background:var(--mint); border-radius:var(--radius-sm); padding:12px 16px; font-size:0.82rem; color:#2E7D32; font-weight:600;">
+            ✅ Your order is protected by our 7-day return guarantee.
+          </div>
+          <div style="margin-top:12px; background:var(--lavender); border-radius:var(--radius-sm); padding:12px 16px; font-size:0.82rem; color:#7B5EA7; font-weight:600;">
+            💎 Each bracelet is cleansed under the full moon before dispatch.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Success Modal ── -->
+  <div class="modal-overlay" id="success-modal">
+    <div class="modal-card">
+      <div class="modal-icon">🎉</div>
+      <h2 class="modal-title">Order Placed!</h2>
+      <p class="modal-text">Your crystals are on their way. ✨ You'll receive a confirmation email shortly. Thank you for choosing Aura Elite!</p>
+      <button class="modal-close" onclick="window.location.href='index.html'">Continue Shopping</button>
+    </div>
+  </div>
+
+
+  <!-- ── Invoice Modal ── -->
+  <div class="modal-overlay" id="invoice-modal">
+    <div class="modal-card">
+      <h2>🧾 Invoice</h2>
+
+      <div id="invoice-content"></div>
+
+      <button onclick="downloadInvoice()" class="upi-btn" style="margin-top:10px;">
+       ⬇️ Download Bill
+      </button>
+
+      
+      <!-- <a href="https://docs.google.com/forms/d/e/1FAIpQLScTROe-C7Z4hgtvphVyHfCeUb_5tzDzB4EbjcEkmmCtnpNnAg/viewform?usp=headerE" target="_blank" class="upi-btn" style="margin-top:10px; display:block; text-align:center;">
+      📋 Submit Order Details
+      </a> -->
+
+
+    </div>
+  </div>
+
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none; padding:16px 0 0;">
+        <span>© 2025 Arth Elite. All rights reserved.</span>
+        <div class="footer-payment">
+          <span class="payment-badge">UPI</span>
+          <!-- <span class="payment-badge">Razorpay</span>
+          <span class="payment-badge">Cards</span> -->
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Redirect to login if not authenticated
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!Auth.isLoggedIn()) {
+        window.location.href = 'login.html?return=checkout.html';
+        return;
+      }
+
+      const user = Auth.getActiveUser();
+      if (user) {
+        document.getElementById('email').value = user.email;
+        document.getElementById('firstname').value = user.name.split(' ')[0] || '';
+        document.getElementById('lastname').value = user.name.split(' ').slice(1).join(' ') || '';
+      }
+
+      renderOrderSummary();
+    });
+
+    function renderOrderSummary() {
+      const cart = Cart.getCart();
+      if (cart.length === 0) { window.location.href = 'cart.html'; return; }
+
+      const orderItems = document.getElementById('order-items');
+      orderItems.innerHTML = cart.map(item => `
+        <div class="order-item">
+          <img class="order-item-img" src="${item.image}" alt="${item.name}" onerror="this.src='images/placeholder.jpg'" />
+          <div style="flex:1; min-width:0;">
+            <div class="order-item-name">${item.name}</div>
+            <div class="order-item-qty">Qty: ${item.qty}</div>
+          </div>
+          <div class="order-item-price">₹${(item.price * item.qty).toLocaleString('en-IN')}</div>
+        </div>
+      `).join('');
+
+      const subtotal = Cart.getTotal();
+      const shipping = subtotal >= 999 ? 0 : 99;
+      const total = subtotal + shipping;
+
+      document.getElementById('co-subtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+      document.getElementById('co-shipping').textContent = shipping === 0 ? 'FREE' : `₹${shipping}`;
+      document.getElementById('co-total').textContent = `₹${total.toLocaleString('en-IN')}`;
+    }
+
+    // Form validation
+    function validateField(id, validator) {
+      const input = document.getElementById(id);
+      const group = document.getElementById(`fg-${id}`);
+      if (!group) return true;
+      const valid = validator(input.value.trim());
+      group.classList.toggle('has-error', !valid);
+      return valid;
+    }
+
+    // document.getElementById('checkout-form').addEventListener('submit', (e) => {
+    //   e.preventDefault();
+
+   // ✅ FINAL CORRECT FUNCTION
+      function confirmPayment() {
+
+        const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        const isPhone = v => /^[6-9]\d{9}$/.test(v.replace(/[\s+\-]/g, ''));
+        const isPin = v => /^\d{6}$/.test(v);
+        const notEmpty = v => v.length > 0;
+
+       const valid =
+          validateField('firstname', notEmpty) &&
+          validateField('lastname', notEmpty) &&
+          validateField('email', isEmail) &&
+          validateField('phone', isPhone) &&
+          validateField('address', notEmpty) &&
+          validateField('city', notEmpty) &&
+          validateField('state', notEmpty) &&
+          validateField('pincode', isPin);
+
+        if (!valid) {
+          alert("Please fill all required details correctly");
+          return;
+        }
+
+        const btn = document.getElementById('pay-btn');
+        btn.textContent = "⏳ Verifying...";
+        btn.disabled = true;
+
+         const userUpi = document.getElementById('user-upi').value.trim();
+        const txnId = document.getElementById('txn-id').value.trim();
+
+        // ✅ VALIDATION
+        if (!userUpi || !txnId) {
+          alert("Please enter UPI ID and Transaction ID");
+          btn.textContent = "✅ I Have Paid";
+          btn.disabled = false;
+          
+
+
+          return;
+        }
+        const cart = Cart.getCart();
+
+        const name = document.getElementById('firstname').value + " " + document.getElementById('lastname').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        const city = document.getElementById('city').value;
+        const total = document.getElementById('co-total').textContent;
+
+        let productDetails = cart.map(item => {
+          return `• ${item.name} (Qty: ${item.qty}) - ₹${item.price * item.qty}`;
+        }).join('\n');
+
+        // ✅ WHATSAPP PART (ADD THIS)
+        // const name = document.getElementById('firstname').value + " " + document.getElementById('lastname').value;
+        // const phone = document.getElementById('phone').value;
+        // const address = document.getElementById('address').value;
+        // const city = document.getElementById('city').value;
+        // const total = document.getElementById('co-total').textContent;
+
+        // const message = ` New Order
+
+        // Name: ${name}
+        // Phone: ${phone}
+        // Address: ${address}, ${city}
+
+        // Order Details:
+        // ${productDetails}
+
+        // Total Amount: ${total}
+
+        // Payment Details:
+        // UPI ID: ${userUpi}
+        // Transaction ID: ${txnId}
+
+        // Please verify payment`;
+        // const url = `https://wa.me/919913337827?text=${encodeURIComponent(message)}`;
+        // window.open(url, "_blank");
+
+
+        // 🧾 ADD THIS HERE (INVOICE PART)
+          const orderId = "AE" + Math.floor(Math.random() * 100000);
+
+          let invoiceHTML = `
+            <h3>Arth Elite</h3>
+            <p><b>Order ID:</b> ${orderId}</p>
+            <p><b>Name:</b> ${name}</p>
+            <p><b>Phone:</b> ${phone}</p>
+            <p><b>Address:</b> ${address}, ${city}</p>
+
+            <hr>
+
+            <h4>Order Items:</h4>
+            <pre>${productDetails}</pre>
+
+            <hr>
+
+            <p><b>Payment Mode:</b> UPI</p>
+            <p style="color:green;"><b>✔ Payment Confirmed</b></p>
+
+            <p>✨ Thank you for shopping with Arth Elite</p>
+          `;
+
+          document.getElementById('invoice-content').innerHTML = invoiceHTML;
+
+          // ✅ ADD THIS PART (AUTO SAVE TO GOOGLE SHEET)
+          fetch("https://script.google.com/macros/s/AKfycbxMLbUt6znrKZQosaYuQkG7pHl5jjhtBnwIZASPd0hFBFMPwITiB52q8IUVK46SFOcfCA/exec", {
+            method: "POST",
+            mode: "no-cors", 
+            body: JSON.stringify({
+              orderId: orderId,
+              name: name,
+              phone: phone,
+              address: address + ", " + city,
+              orderDetails: productDetails,
+              total: total
+            })
+          });
+
+          console.log("Sending data:", {
+            orderId, name, phone, address, city, productDetails, total
+          });;
+
+          setTimeout(() => {
+          Cart.clearCart();
+
+          // 🧾 Show invoice instead of success modal
+          document.getElementById('invoice-modal').classList.add('open');
+        }, 1500);
+      }
+
+
+      function downloadInvoice() {
+        const { jsPDF } = window.jspdf;
+
+        const doc = new jsPDF();
+
+        const content = document.getElementById("invoice-content").innerText;
+
+        doc.setFont("Helvetica", "Normal");
+        doc.setFontSize(12);
+
+        const lines = doc.splitTextToSize(content, 180);
+        doc.text(lines, 10, 10);
+
+        doc.save("ArthElite-Invoice.pdf");
+      }
+
+
+      // setTimeout(() => {
+      //   Cart.clearCart();
+      //   document.getElementById('success-modal').classList.add('open');
+      // }, 2000);
+
+
+      //✅ ADD THIS HERE (outside submit function)
+      
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+
+  </script>
+</body>
+</html>

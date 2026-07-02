@@ -8,7 +8,7 @@
 ## 📁 File Structure
 
 ```
-aura-elite/
+arth-elite/
 ├── index.html          → Homepage (Hero, Featured Products, Categories, Testimonials)
 ├── shop.html           → Full Shop (Search, Filter, Sort, All 15 Products)
 ├── product.html        → Single Product View (Gallery, Details, Similar Products)
@@ -24,7 +24,7 @@ aura-elite/
 │   ├── wishlist.js     → Toggle Wishlist State via localStorage
 │   └── auth.js         → Register / Login / Logout / Navbar Auth State
 └── images/
-    ├── logo.png        → Aura Elite Brand Logo (height: 75px)
+    ├── logo.png        → Arth Elite Brand Logo (height: 75px)
     ├── p1.jpg          → Mother of Pearl Bracelet
     ├── p2.jpg          → Citrine Bracelet
     ├── p3.jpg          → Labradorite Bracelet

@@ -1,4 +1,4 @@
-# ✨ Aura Elite — Premium Crystal Bracelet eCommerce Website
+# ✨ Arth Elite — Premium Crystal Bracelet eCommerce Website
 
 **Tagline:** Feel the Aura ✨  
 **Niche:** Luxury Crystal Bracelets (Healing · Wealth · Love · Protection)
